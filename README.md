@@ -28,6 +28,28 @@ https://cdn.jsdelivr.net/gh/leekowen/leeko-@main/icons/app/honor-of-kings.png
 
 如果 GitHub Raw 在网络环境里不稳定，优先使用 jsDelivr。
 
+### 图标集地址
+
+```text
+https://raw.githubusercontent.com/leekowen/leeko-/main/Other/leeko-icons.json
+```
+
+这个 JSON 参考 Qure 图标集的结构：
+
+```json
+{
+  "name": "leeko Icons",
+  "icons": [
+    {
+      "name": "honor-of-kings.png",
+      "url": "https://raw.githubusercontent.com/leekowen/leeko-/main/icons/app/honor-of-kings.png"
+    }
+  ]
+}
+```
+
+其中 `icons` 里的每个 `url` 都是 GitHub Raw 直链，可以直接复制到 Loon 的 `img-url` 或 Surge 的 `icon-url` 中使用。
+
 ## 已收录图标
 
 ```text
