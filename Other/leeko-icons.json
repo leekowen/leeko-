@@ -1,0 +1,14 @@
+{
+  "name": "leeko Icons",
+  "icons": [
+    {
+      "name": "honor-of-kings.png",
+      "url": "https://raw.githubusercontent.com/leekowen/leeko-/main/icons/app/honor-of-kings.png"
+    },
+    {
+      "name": "mobile-legends-bang-bang.png",
+      "url": "https://raw.githubusercontent.com/leekowen/leeko-/main/icons/app/mobile-legends-bang-bang.png"
+    }
+  ],
+  "description": "leeko Icons 是用于 Loon 与 Surge 的个人图标集。JSON 中的 url 均为 GitHub Raw 直链，可直接用于 img-url 或 icon-url。"
+}
