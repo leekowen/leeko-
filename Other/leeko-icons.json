@@ -8,6 +8,10 @@
     {
       "name": "mobile-legends-bang-bang.png",
       "url": "https://raw.githubusercontent.com/leekowen/leeko-/main/icons/app/mobile-legends-bang-bang.png"
+    },
+    {
+      "name": "stitch.png",
+      "url": "https://raw.githubusercontent.com/leekowen/leeko-/main/icons/app/stitch.png"
     }
   ],
   "description": "leeko Icons 是用于 Loon 与 Surge 的个人图标集。JSON 中的 url 均为 GitHub Raw 直链，可直接用于 img-url 或 icon-url。"
