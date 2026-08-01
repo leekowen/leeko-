@@ -55,6 +55,7 @@ https://raw.githubusercontent.com/leekowen/leeko-/main/Other/leeko-icons.json
 ```text
 icons/app/mobile-legends-bang-bang.png  # 决胜巅峰 / Mobile Legends: Bang Bang
 icons/app/honor-of-kings.png            # 王者荣耀国际服 / Honor of Kings
+icons/app/stitch.png                    # Stitch 原创风格图标
 ```
 
 ## Loon 示例
