@@ -54,10 +54,10 @@ Proxy = select, ProxyA, ProxyB, icon-url=https://cdn.jsdelivr.net/gh/leekowen/le
 ### 使用方式
 
 1. 打开规则网站，点击规则图标或“导入 Loon”。
-2. Loon 打开后确认导入；规则中使用的策略名需已存在于你的配置中。
+2. Loon 打开后确认导入，并按自己的配置为规则指定策略。
 3. 也可点击“复制规则链接”，再在 Loon 中手动添加远程规则。
 
-当前 `Stitch` 规则仅匹配 `stitch.withgoogle.com`，不预设策略名称；导入后可按自己的配置指定策略。
+当前已收录 `Stitch`（仅匹配 `stitch.withgoogle.com`）和 `Chery`（匹配 `chery.com` 及其子域名）规则；均不预设策略名称，导入后可按自己的配置指定策略。
 
 ### 规则网站
 

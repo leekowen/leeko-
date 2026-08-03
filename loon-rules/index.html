@@ -11,11 +11,13 @@
       main { width: min(680px, calc(100% - 40px)); padding: 32px 0; }
       h1 { margin-bottom: 8px; font-size: 30px; }
       .intro { color: #667085; margin: 0 0 24px; }
+      .rules { display: grid; gap: 16px; }
       .rule { padding: 22px; border-radius: 16px; background: #fff; box-shadow: 0 8px 28px rgba(16, 24, 40, .08); }
       .rule-head { display: flex; align-items: center; gap: 14px; }
       .rule-icon { display: grid; width: 52px; height: 52px; flex: 0 0 auto; place-items: center; overflow: hidden; border-radius: 14px; background: #eef2f8; }
       .rule-icon:focus-visible { outline: 3px solid #84adff; outline-offset: 3px; }
       .rule-icon img { display: block; width: 100%; height: 100%; object-fit: cover; }
+      .rule-icon--text { color: #fff; background: linear-gradient(135deg, #c1121f, #ef476f); font-size: 19px; font-weight: 800; letter-spacing: -.04em; }
       h2 { margin: 0 0 6px; font-size: 21px; }
       p { line-height: 1.55; }
       code { display: block; overflow-wrap: anywhere; padding: 10px; border-radius: 8px; background: #eef2f8; font-size: 12px; color: #344054; }
@@ -32,31 +34,30 @@
   <body>
     <main>
       <h1>Loon 规则集</h1>
-      <p class="intro">选择规则后可直接导入 Loon，或复制规则链接。</p>
-      <section class="rule">
-        <div class="rule-head">
-          <a class="rule-icon" id="stitch-icon" href="#" aria-label="导入 Stitch 规则到 Loon" title="点击导入到 Loon">
-            <img src="../icons/app/stitch.png" alt="Stitch 图标">
-          </a>
-          <h2>Stitch</h2>
-        </div>
-        <p>Google Stitch 官方站点规则。规则不预设策略名称，导入后可按自己的配置指定策略。</p>
-        <code id="stitch-url">https://raw.githubusercontent.com/leekowen/leeko-/main/loon-rules/stitch.list</code>
-        <div class="actions">
-          <a class="import" id="stitch-import" href="#">导入到 Loon</a>
-          <button class="copy" id="stitch-copy" type="button">复制规则链接</button>
-        </div>
-        <p class="status" id="status" aria-live="polite"></p>
-      </section>
+      <p class="intro">共 <span id="rule-count">0</span> 条规则；点击图标或按钮可直接导入 Loon，也可复制规则链接。</p>
+      <div class="rules" id="rules" aria-live="polite"></div>
       <footer>公开规则集 · <a href="https://github.com/leekowen/leeko-/tree/main/loon-rules">GitHub 仓库</a></footer>
     </main>
     <script>
-      const rawUrl = document.querySelector('#stitch-url').textContent.trim();
-      const importUrl = `https://www.nsloon.com/openloon/import?rules=${encodeURIComponent(rawUrl)}`;
-      document.querySelector('#stitch-import').href = importUrl;
-      document.querySelector('#stitch-icon').href = importUrl;
-      document.querySelector('#stitch-copy').addEventListener('click', async () => {
-        const status = document.querySelector('#status');
+      const rules = [
+        {
+          name: 'Stitch',
+          description: 'Google Stitch 官方 Web 服务规则。规则不预设策略名称，导入后可按自己的配置指定策略。',
+          file: 'stitch.list',
+          icon: '../icons/app/stitch.png'
+        },
+        {
+          name: 'Chery',
+          description: '奇瑞官网及其全部子域名规则。规则不预设策略名称，导入后可按自己的配置指定策略。',
+          file: 'Chery.list',
+          iconText: 'C'
+        }
+      ];
+      const baseUrl = 'https://raw.githubusercontent.com/leekowen/leeko-/main/loon-rules/';
+      const container = document.querySelector('#rules');
+      document.querySelector('#rule-count').textContent = rules.length;
+
+      const copyRuleUrl = async (rawUrl, status) => {
         try {
           if (!navigator.clipboard) throw new Error('Clipboard API unavailable');
           await navigator.clipboard.writeText(rawUrl);
@@ -76,6 +77,31 @@
           }
           textarea.remove();
         }
+      };
+
+      rules.forEach((rule) => {
+        const rawUrl = `${baseUrl}${rule.file}`;
+        const importUrl = `https://www.nsloon.com/openloon/import?rules=${encodeURIComponent(rawUrl)}`;
+        const icon = rule.icon
+          ? `<img src="${rule.icon}" alt="${rule.name} 图标">`
+          : rule.iconText;
+        const iconClass = rule.icon ? 'rule-icon' : 'rule-icon rule-icon--text';
+        const card = document.createElement('section');
+        card.className = 'rule';
+        card.innerHTML = `
+          <div class="rule-head">
+            <a class="${iconClass}" href="${importUrl}" aria-label="导入 ${rule.name} 规则到 Loon" title="点击导入到 Loon">${icon}</a>
+            <h2>${rule.name}</h2>
+          </div>
+          <p>${rule.description}</p>
+          <code>${rawUrl}</code>
+          <div class="actions">
+            <a class="import" href="${importUrl}">导入到 Loon</a>
+            <button class="copy" type="button">复制规则链接</button>
+          </div>
+          <p class="status" aria-live="polite"></p>`;
+        card.querySelector('.copy').addEventListener('click', () => copyRuleUrl(rawUrl, card.querySelector('.status')));
+        container.append(card);
       });
     </script>
   </body>
