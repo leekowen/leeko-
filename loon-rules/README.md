@@ -5,6 +5,9 @@
 | 规则 | 导入 Loon | 复制链接 |
 | --- | --- | --- |
 | Stitch | [一键导入](https://www.nsloon.com/openloon/import?rules=https%3A%2F%2Fraw.githubusercontent.com%2Fleekowen%2Fleeko-%2Fmain%2Floon-rules%2Fstitch.list) | 在[规则首页](https://leekowen.github.io/leeko-/loon-rules/)点击“复制规则链接” |
+| Chery | [一键导入](https://www.nsloon.com/openloon/import?rules=[loon-rules/Chery](https://github.com/leekowen/leeko-/blob/main/loon-rules/Chery)) | |
+
+
 
 ## 使用说明
 
