@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Leeko App 图标库，可复制 Loon 和 Surge 可用的图标直链。">
+    <title>Leeko App 图标库</title>
+    <style>
+      :root { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; color: #172033; background: #f5f7fb; }
+      body { margin: 0; min-width: 320px; }
+      main { width: min(960px, calc(100% - 40px)); margin: 56px auto; }
+      h1 { margin: 0 0 8px; font-size: clamp(28px, 5vw, 38px); }
+      .intro { margin: 0 0 28px; color: #667085; line-height: 1.6; }
+      .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 18px; }
+      .card { padding: 20px; border-radius: 16px; background: #fff; box-shadow: 0 8px 28px rgba(16, 24, 40, .08); }
+      .icon { display: block; width: 88px; height: 88px; margin-bottom: 16px; border-radius: 18px; object-fit: cover; background: #eef2f8; }
+      h2 { margin: 0 0 12px; font-size: 19px; }
+      code { display: block; min-height: 36px; overflow-wrap: anywhere; padding: 10px; border-radius: 8px; background: #eef2f8; color: #344054; font-size: 12px; line-height: 1.45; }
+      button { width: 100%; margin-top: 12px; border: 0; border-radius: 9px; padding: 10px 14px; color: #155eef; background: #eaf0ff; font: inherit; font-weight: 600; cursor: pointer; }
+      button:hover { background: #dbe7ff; }
+      .status { min-height: 1.3em; margin: 18px 0 0; color: #039855; font-size: 14px; }
+      footer { margin-top: 30px; color: #667085; font-size: 14px; }
+      a { color: #155eef; }
+      @media (prefers-color-scheme: dark) { :root { color: #f9fafb; background: #101828; } .intro, footer { color: #cbd5e1; } .card { background: #1d2939; } code { color: #f2f4f7; background: #344054; } .icon { background: #344054; } button { color: #dbe7ff; background: #233a68; } button:hover { background: #2c4b85; } }
+    </style>
+  </head>
+  <body>
+    <main>
+      <h1>App 图标库</h1>
+      <p class="intro">点击“复制图标地址”即可取得可直接用于 Loon <code>img-url</code> 或 Surge <code>icon-url</code> 的 GitHub Raw 直链。</p>
+      <section class="grid" aria-label="App 图标">
+        <article class="card">
+          <img class="icon" src="mobile-legends-bang-bang.png" alt="决胜巅峰图标">
+          <h2>决胜巅峰</h2>
+          <code>https://raw.githubusercontent.com/leekowen/leeko-/main/icons/app/mobile-legends-bang-bang.png</code>
+          <button type="button" data-url="https://raw.githubusercontent.com/leekowen/leeko-/main/icons/app/mobile-legends-bang-bang.png">复制图标地址</button>
+        </article>
+        <article class="card">
+          <img class="icon" src="honor-of-kings.png" alt="Honor of Kings 图标">
+          <h2>Honor of Kings</h2>
+          <code>https://raw.githubusercontent.com/leekowen/leeko-/main/icons/app/honor-of-kings.png</code>
+          <button type="button" data-url="https://raw.githubusercontent.com/leekowen/leeko-/main/icons/app/honor-of-kings.png">复制图标地址</button>
+        </article>
+        <article class="card">
+          <img class="icon" src="stitch.png" alt="Stitch 图标">
+          <h2>Stitch</h2>
+          <code>https://raw.githubusercontent.com/leekowen/leeko-/main/icons/app/stitch.png</code>
+          <button type="button" data-url="https://raw.githubusercontent.com/leekowen/leeko-/main/icons/app/stitch.png">复制图标地址</button>
+        </article>
+      </section>
+      <p class="status" id="status" aria-live="polite"></p>
+      <footer>提示：GitHub 仓库文件页不能直接作为图标链接，请使用此页复制的 Raw 地址。<a href="https://github.com/leekowen/leeko-/tree/main/icons/app">查看仓库目录</a></footer>
+    </main>
+    <script>
+      const status = document.querySelector('#status');
+      document.querySelectorAll('[data-url]').forEach((button) => {
+        button.addEventListener('click', async () => {
+          try {
+            await navigator.clipboard.writeText(button.dataset.url);
+            status.textContent = '图标地址已复制。';
+          } catch {
+            status.textContent = '复制失败，请手动复制卡片中的地址。';
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
