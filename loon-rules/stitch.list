@@ -2,8 +2,7 @@
 # AUTHOR: leekowen
 # REPO: https://github.com/leekowen/leeko-/tree/main/loon-rules
 # UPDATED: 2026-08-01
-#
+# DOMAIN-KEYWORD: 1
 # Google Stitch 官方 Web 服务。
-# 请确保你的 Loon 配置中存在名为 PROXY 的策略或策略组。
 
-DOMAIN-SUFFIX,stitch.withgoogle.com,PROXY
+DOMAIN-SUFFIX,stitch.withgoogle.com
