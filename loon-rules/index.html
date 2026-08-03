@@ -8,10 +8,14 @@
     <style>
       :root { color-scheme: light dark; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
       body { margin: 0; min-height: 100vh; display: grid; place-items: center; background: #f5f7fb; color: #172033; }
-      main { width: min(680px, calc(100% - 40px)); }
+      main { width: min(680px, calc(100% - 40px)); padding: 32px 0; }
       h1 { margin-bottom: 8px; font-size: 30px; }
       .intro { color: #667085; margin: 0 0 24px; }
       .rule { padding: 22px; border-radius: 16px; background: #fff; box-shadow: 0 8px 28px rgba(16, 24, 40, .08); }
+      .rule-head { display: flex; align-items: center; gap: 14px; }
+      .rule-icon { display: grid; width: 52px; height: 52px; flex: 0 0 auto; place-items: center; overflow: hidden; border-radius: 14px; background: #eef2f8; }
+      .rule-icon:focus-visible { outline: 3px solid #84adff; outline-offset: 3px; }
+      .rule-icon img { display: block; width: 100%; height: 100%; object-fit: cover; }
       h2 { margin: 0 0 6px; font-size: 21px; }
       p { line-height: 1.55; }
       code { display: block; overflow-wrap: anywhere; padding: 10px; border-radius: 8px; background: #eef2f8; font-size: 12px; color: #344054; }
@@ -21,7 +25,8 @@
       .copy { color: #155eef; background: #eaf0ff; }
       .status { min-height: 1.3em; color: #039855; font-size: 14px; }
       footer { margin-top: 24px; color: #667085; font-size: 14px; }
-      @media (prefers-color-scheme: dark) { body { background: #101828; color: #f9fafb; } .rule { background: #1d2939; } .intro, footer { color: #cbd5e1; } code { background: #344054; color: #f2f4f7; } .copy { background: #233a68; color: #dbe7ff; } }
+      @media (max-width: 480px) { main { width: min(100% - 28px, 680px); padding: 24px 0; } h1 { font-size: 27px; } .rule { padding: 18px; } .actions { display: grid; grid-template-columns: 1fr; } a, button { text-align: center; } }
+      @media (prefers-color-scheme: dark) { body { background: #101828; color: #f9fafb; } .rule { background: #1d2939; } .rule-icon { background: #344054; } .intro, footer { color: #cbd5e1; } code { background: #344054; color: #f2f4f7; } .copy { background: #233a68; color: #dbe7ff; } }
     </style>
   </head>
   <body>
@@ -29,8 +34,13 @@
       <h1>Loon 规则集</h1>
       <p class="intro">选择规则后可直接导入 Loon，或复制规则链接。</p>
       <section class="rule">
-        <h2>Stitch</h2>
-        <p>Google Stitch 官方站点规则。规则使用 <code>PROXY</code> 策略；请在 Loon 中保留同名策略或策略组。</p>
+        <div class="rule-head">
+          <a class="rule-icon" id="stitch-icon" href="#" aria-label="导入 Stitch 规则到 Loon" title="点击导入到 Loon">
+            <img src="../icons/app/stitch.png" alt="Stitch 图标">
+          </a>
+          <h2>Stitch</h2>
+        </div>
+        <p>Google Stitch 官方站点规则。规则不预设策略名称，导入后可按自己的配置指定策略。</p>
         <code id="stitch-url">https://raw.githubusercontent.com/leekowen/leeko-/main/loon-rules/stitch.list</code>
         <div class="actions">
           <a class="import" id="stitch-import" href="#">导入到 Loon</a>
@@ -42,14 +52,29 @@
     </main>
     <script>
       const rawUrl = document.querySelector('#stitch-url').textContent.trim();
-      document.querySelector('#stitch-import').href = `https://www.nsloon.com/openloon/import?rules=${encodeURIComponent(rawUrl)}`;
+      const importUrl = `https://www.nsloon.com/openloon/import?rules=${encodeURIComponent(rawUrl)}`;
+      document.querySelector('#stitch-import').href = importUrl;
+      document.querySelector('#stitch-icon').href = importUrl;
       document.querySelector('#stitch-copy').addEventListener('click', async () => {
         const status = document.querySelector('#status');
         try {
+          if (!navigator.clipboard) throw new Error('Clipboard API unavailable');
           await navigator.clipboard.writeText(rawUrl);
           status.textContent = '规则链接已复制。';
         } catch {
-          status.textContent = '复制失败，请长按上方链接后复制。';
+          const textarea = document.createElement('textarea');
+          textarea.value = rawUrl;
+          textarea.style.position = 'fixed';
+          textarea.style.opacity = '0';
+          document.body.append(textarea);
+          textarea.select();
+          try {
+            document.execCommand('copy');
+            status.textContent = '规则链接已复制。';
+          } catch {
+            status.textContent = '复制失败，请长按上方链接后复制。';
+          }
+          textarea.remove();
         }
       });
     </script>
