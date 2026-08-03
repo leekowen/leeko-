@@ -1,0 +1,8 @@
+# NAME: Stitch
+# AUTHOR: leekowen
+# REPO: https://github.com/leekowen/leeko-/tree/main/loon-rules
+# UPDATED: 2026-08-03
+# DOMAIN-KEYWORD: 1
+# 奇瑞服务直连
+
+DOMAIN-SUFFIX,mychery.com
